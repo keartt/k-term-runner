@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <!-- CSP: 이 앱 자신의 파일만 불러오도록 제한 (Electron 보안 권장) -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'" />
+    <title>k-term-runner</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- 왼쪽: 포트 관리 + 등록된 명령 목록 -->
+    <aside>
+      <button id="portsBtn">🔌 포트 관리</button>
+      <ul id="list"></ul>
+      <button id="add" title="java -jar 같은 명령 등록">+ 명령 추가</button>
+    </aside>
+
+    <!-- 오른쪽 화면 1: 선택한 명령의 로그 -->
+    <main id="logView">
+      <div class="toolbar">
+        <strong id="title">왼쪽에서 명령을 추가하세요</strong>
+        <button id="start">▶ 시작</button>
+        <button id="stop" title="mac: 한 번 더 누르면 강제 종료">■ 중지</button>
+        <button id="restart">↻ 재시작</button>
+        <button id="edit">수정</button>
+        <button id="remove">삭제</button>
+      </div>
+      <div class="toolbar">
+        <input id="search" placeholder="로그 검색 (Ctrl/Cmd+F) — 일치하는 줄만 표시" />
+        <span id="count"></span>
+        <button id="openLog">파일 열기</button>
+        <button id="clearLog">로그 지우기</button>
+      </div>
+      <pre id="log"></pre>
+    </main>
+
+    <!-- 오른쪽 화면 2: 포트 관리 -->
+    <main id="portView" hidden>
+      <div class="toolbar">
+        <strong>열린 포트 (LISTEN)</strong>
+        <input id="portSearch" placeholder="포트 / 프로세스 이름 / PID 검색" />
+        <button id="portRefresh">↻ 새로고침</button>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>포트</th><th>주소</th><th>PID</th><th>프로세스</th><th></th></tr>
+          </thead>
+          <tbody id="portRows"></tbody>
+        </table>
+      </div>
+    </main>
+
+    <!-- 명령 추가/수정 창 (HTML 기본 dialog 요소) -->
+    <dialog id="form">
+      <form method="dialog">
+        <label>이름 <input name="name" required placeholder="api-server" /></label>
+        <label>명령 <input name="cmd" required placeholder="java -jar app.jar --spring.profiles.active=dev" /></label>
+        <label>
+          작업 폴더
+          <span class="row"><input name="cwd" placeholder="비우면 홈 폴더" /><button type="button" id="pickDir">찾기</button></span>
+        </label>
+        <label>
+          로그 파일 (경로 + 파일 이름)
+          <span class="row"><input name="logFile" placeholder="비우면 기본 위치 (앱 데이터 폴더/logs)" /><button type="button" id="pickLog">찾기</button></span>
+        </label>
+        <label>
+          출력 인코딩
+          <select name="encoding">
+            <option value="utf-8">UTF-8</option>
+            <option value="euc-kr">EUC-KR (한글 Windows 에서 깨질 때)</option>
+          </select>
+        </label>
+        <div class="row">
+          <button value="save">저장</button>
+          <button value="cancel" formnovalidate>취소</button>
+        </div>
+      </form>
+    </dialog>
+
+    <script src="renderer.js"></script>
+  </body>
+</html>

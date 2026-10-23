@@ -1,0 +1,41 @@
+node_modules/
+package-lock.json
+out/
+
+# OS
+.DS_Store
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+*.egg-info/
+
+# Node
+node_modules/
+dist/
+build/
+target/
+
+# 무거운 실습 산출물
+shi_rnd/docs/
+*.pdf
+*.pptx
+*.zip
+*.tar
+*.tar.gz
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.onnx
+
+# etc
+sprite-gen/
+AI_Deploy/

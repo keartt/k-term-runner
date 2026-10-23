@@ -1,0 +1,5 @@
+<!-- mac 메뉴바 아이콘 원본: 검정 + 투명만 사용 (Template 이미지라서 macOS 가 다크/라이트에 맞게 색을 바꿈) -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16">
+  <polyline points="2.5,4 6.5,8 2.5,12" fill="none" stroke="#000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+  <line x1="8.5" y1="12" x2="13.5" y2="12" stroke="#000" stroke-width="1.8" stroke-linecap="round" />
+</svg>

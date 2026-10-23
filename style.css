@@ -1,0 +1,154 @@
+/* 화면 전체: 왼쪽 목록 + 오른쪽 로그 2단 구성 */
+body {
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  font-family: system-ui, sans-serif;
+  font-size: 13px;
+  background: #1e1e1e;
+  color: #ddd;
+}
+button,
+input,
+select {
+  font: inherit;
+  color: inherit;
+  background: #333;
+  border: 1px solid #555;
+  border-radius: 4px;
+  padding: 4px 8px;
+}
+button:disabled {
+  opacity: 0.4;
+}
+
+/* 왼쪽 목록 */
+aside {
+  width: 220px;
+  padding: 8px;
+  border-right: 1px solid #333;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+#list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow: auto;
+}
+#list li {
+  padding: 6px 8px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+#list li.active {
+  background: #094771;
+}
+/* 실행 상태 점: 회색 = 중지, 초록 = 실행 중 */
+#list li::before {
+  content: '●';
+  margin-right: 6px;
+  color: #666;
+}
+#list li.running::before {
+  color: #2ecc71;
+}
+
+/* 오른쪽 */
+main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+.toolbar {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+  padding: 6px 8px;
+  border-bottom: 1px solid #333;
+}
+#title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#search {
+  flex: 1;
+}
+/* 로그 영역: 남는 공간을 모두 쓰고 자체 스크롤 */
+#log {
+  flex: 1;
+  margin: 0;
+  padding: 8px;
+  overflow: auto;
+  font-family: ui-monospace, Menlo, Consolas, monospace;
+  font-size: 12px;
+  white-space: pre-wrap;
+  word-break: break-all;
+}
+
+/* 추가/수정 창 */
+dialog {
+  background: #252526;
+  color: inherit;
+  border: 1px solid #555;
+  width: 520px;
+}
+dialog form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+dialog label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.row {
+  display: flex;
+  gap: 6px;
+}
+.row input {
+  flex: 1;
+}
+
+/* hidden 속성이 display:flex 같은 스타일에 덮이지 않게 */
+[hidden] {
+  display: none !important;
+}
+
+#portsBtn.active {
+  background: #094771;
+}
+
+/* 포트 표 */
+#portSearch {
+  flex: 1;
+}
+.table-wrap {
+  flex: 1;
+  overflow: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  text-align: left;
+  padding: 6px 10px;
+  border-bottom: 1px solid #2d2d2d;
+}
+th {
+  position: sticky; /* 스크롤해도 머리글 고정 */
+  top: 0;
+  background: #252526;
+}
+button.danger {
+  border-color: #a1260d;
+  color: #f48771;
+}
